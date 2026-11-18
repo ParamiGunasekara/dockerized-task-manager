@@ -1,0 +1,27 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Log files
+*.log
+logs/
+
+# Build outputs
+dist/
+build/
+coverage/
+
+# Local database data
+mysql-data/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
