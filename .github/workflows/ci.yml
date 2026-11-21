@@ -1,0 +1,43 @@
+
+name: TaskFlow CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-and-build:
+    name: Test and Build Docker Images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Check backend JavaScript syntax
+        run: node --check backend/server.js
+
+      - name: Check database connection module syntax
+        run: node --check backend/db.js
+
+      - name: Check frontend JavaScript syntax
+        run: node --check frontend/script.js
+
+      - name: Build backend Docker image
+        run: docker build -t taskflow-backend:ci ./backend
+
+      - name: Build frontend Docker image
+        run: docker build -t taskflow-frontend:ci -f frontend/Dockerfile .
