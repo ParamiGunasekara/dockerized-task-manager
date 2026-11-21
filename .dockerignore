@@ -1,0 +1,10 @@
+.env
+.env.*
+.git
+.github
+**/node_modules
+**/.env
+**/.env.*
+**/*.log
+backend/test-db.js
+docs
