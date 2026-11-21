@@ -146,6 +146,12 @@ app.delete("/api/tasks/:id", async (req, res) => {
 });
 
 // Start backend
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`TaskFlow backend running on port ${PORT}`);
-});
+
+if (require.main === module) {
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`TaskFlow backend running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
+
